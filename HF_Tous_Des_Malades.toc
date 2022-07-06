@@ -1,4 +1,4 @@
-## Interface: 80200
+## Interface: 20504
 ## Title: Tous des malades
 ## Author: Firedream
 ## Version: 1.0
