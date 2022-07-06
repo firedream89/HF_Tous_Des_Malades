@@ -38,8 +38,8 @@ ITEM_RAPI_QUEST = { 18332, 18335, 14344, 12938 }
 ITEMS_SHEN_DRALAR_QUEST = { 18332, 18333, 18334, 18335, 14344, 12753, 12735, 12938 }
 SHEN_DRALAR_REQUIRE_QUEST_COMPETED = C_QuestLog.IsQuestFlaggedCompleted(7482)
 ICONS_FOCA = { "inv_misc_book_04", "inv_misc_gem_02", "inv_enchant_shardbrilliantlarge", "inv_misc_shadowegg" }
-ICONS_PROT = { "inv_misc_book_04", "inv_misc_gem_02", "inv_enchant_shardbrilliantlarge", "inv_misc_shadowegg" }
-ICONS_RAPI = { "inv_misc_book_04", "inv_misc_gem_02", "inv_enchant_shardbrilliantlarge", "inv_misc_shadowegg" }
+ICONS_PROT = { "inv_misc_book_11", "inv_misc_gem_02", "inv_enchant_shardbrilliantlarge", "inv_misc_pelt_boar_ruin_03" }
+ICONS_RAPI = { "inv_misc_book_02", "inv_misc_gem_02", "inv_enchant_shardbrilliantlarge", "inv_potion_33" }
 
 --FOIRE DE SOMBRELUNE
 REPUT_FOIRE_CARD = 25
