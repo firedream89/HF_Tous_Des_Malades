@@ -162,7 +162,7 @@ function Get_Quests_Items_Color(faction_id, item)
         for i = 1, #items_id do
             for i2 = 1, #items_id[i] do
                 local nb_items = GetItemCount(items_id[i][i2], true)
-                Add_Item(faction_id, i, nb_items) --Update database
+                Add_Item(faction_id, i2, nb_items) --Update database
                 if Sum_Item(faction_id, i) < items_quantity[i][i2] then
                     isOk = false
                 end
