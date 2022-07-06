@@ -1,0 +1,11 @@
+## Interface: 80200
+## Title: Tous des malades
+## Author: Firedream
+## Version: 1.0
+## SavedVariables: TDMDB
+
+const.lua
+init.lua
+database.lua
+main.lua
+ui.lua
