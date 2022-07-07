@@ -243,3 +243,11 @@ function Get_UI_State(id)
     end
     return TDMDB.state[id]
 end
+
+function Set_Ui_Show(show)
+    TDMDB.showUI = show
+end
+
+function Get_Ui_Show()
+    return TDMDB.showUI
+end

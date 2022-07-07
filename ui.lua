@@ -1,4 +1,4 @@
-UI = { ui = nil }
+UI = { ui = nil, Timer = C_Timer.NewTicker(15, Update) }
 
 --Create UI Widget
 function UI:Init(object)
@@ -10,9 +10,6 @@ function UI:Init(object)
     self.ui:SetSize(300, 300)
     self.ui.frame = {}
     self.ui.frame_y = {}
-    self.ui:Show()
-
-    Timer = C_Timer.NewTicker(5, Update)
 
     return self
 end
@@ -46,11 +43,18 @@ end
 ---Hide UI
 function UI:Hide()
     self.ui:Hide()
+    self.Timer:Cancel()
+    Set_Ui_Show(false)
 end
 
 ---Show UI
 function UI:Show()
     self.ui:Show()
+    if self.Timer ~= nil then
+        self.Timer:Cancel()
+    end
+    self.Timer = C_Timer.NewTicker(15, Update)
+    Set_Ui_Show(true)
 end
 
 ---Set frame texture
@@ -171,11 +175,16 @@ function UI:Update(list)
             end
 
             self.ui.frame[i].level = list[i][1]
-        end
+        end--[[
         for i=1, #self.ui.frame do
             if self.ui.frame[i].expandable then
                 print("FRAME : ", i, "CHILDREN : ", #self.ui.frame[i].children)
             end
+        end]]--
+        if Get_Ui_Show() then
+            Ui:Show()
+        else
+            Ui:Hide()
         end
     end
 

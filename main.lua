@@ -154,7 +154,6 @@ function Get_Quests_Items_Color(faction_id, item)
 
     local isOk = true
     if item ~= nil then
-        local nb_items = GetItemCount(items_id[1][item], true)
         if Sum_Item(faction_id, item) < items_quantity[1][item] then
             isOk = false
         end
