@@ -44,6 +44,14 @@ function Get_Item(faction_id, item_number)
             return TDMDB.shen_dralar.item7
         elseif item_number == 8 then
             return TDMDB.shen_dralar.item8
+        elseif item_number == 9 then
+            return TDMDB.shen_dralar.item9
+        elseif item_number == 10 then
+            return TDMDB.shen_dralar.item10
+        elseif item_number == 11 then
+            return TDMDB.shen_dralar.item11
+        elseif item_number == 12 then
+            return TDMDB.shen_dralar.item12
         end
     elseif faction_id == FOIRE_DE_SOMBRELUNE then
         if item_number == 1 then
@@ -121,6 +129,14 @@ function Set_Item(faction_id, item_number, item)
             TDMDB.shen_dralar.item7 = item
         elseif item_number == 8 then
             TDMDB.shen_dralar.item8 = item
+        elseif item_number == 9 then
+            TDMDB.shen_dralar.item9 = item
+        elseif item_number == 10 then
+            TDMDB.shen_dralar.item10 = item
+        elseif item_number == 11 then
+            TDMDB.shen_dralar.item11 = item
+        elseif item_number == 12 then
+            TDMDB.shen_dralar.item12 = item
         end
     elseif faction_id == FOIRE_DE_SOMBRELUNE then
         if item_number == 1 then
@@ -210,7 +226,7 @@ end
 function Add_Item(faction_id, item_number, item_quantity)
     local item = Get_Item(faction_id, item_number)
     local found = false
-    if item ~= nil and item ~= {}then
+    if item ~= nil and item ~= {} then
         for i = 1, #item do
             if item[i][1] == UnitGUID("player") then
                 found = true

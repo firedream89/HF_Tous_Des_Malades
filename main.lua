@@ -158,14 +158,16 @@ function Get_Quests_Items_Color(faction_id, item)
             isOk = false
         end
     else
+        local itemsSum = 0
         for i = 1, #items_id do
             for i2 = 1, #items_id[i] do
                 local nb_items = GetItemCount(items_id[i][i2], true)
-                Add_Item(faction_id, i2, nb_items) --Update database
+                Add_Item(faction_id, i2 + itemsSum, nb_items) --Update database
                 if Sum_Item(faction_id, i) < items_quantity[i][i2] then
                     isOk = false
                 end
             end
+            itemsSum = itemsSum + #items_id[i]
         end
     end
     
@@ -185,6 +187,7 @@ function Get_Items_Number(faction_id)
         return items, 0
     end
     
+    local last_items_count = 0
     for i = 1, #items_quest do
         items[#items+1] = {}
         for i2 = 1, #items_quest[i] do
@@ -196,8 +199,9 @@ function Get_Items_Number(faction_id)
             if #items_icon ~= #items_quest then
                 items_icon = items_quest
             end
-            items[i][#items[i]+1] = { items_icon[i][i2], itemName, Sum_Item(faction_id, i2), items_quantity[i][i2] }
+            items[i][#items[i]+1] = { items_icon[i][i2], itemName, Sum_Item(faction_id, i2 + last_items_count), items_quantity[i][i2] }
         end
+        last_items_count = last_items_count + #items_quest[i]
     end
     return items, items_table
 end
@@ -221,14 +225,22 @@ function Update()
             list_result[#list_result+1] = { 1, Get_Quests_Items_Color(reput[id][1])..reput[id][2].." "..reput[id][3].."/"..max.."XP "..Get_Remaining_Kill(reput[id][1], reput[id][3]).."|r</p>" }
             result, items_table = Get_Items_Number(reput[id][1])
             local level = 2
+            local pos = 0
+            local pos_item = 0
+            local items_count = 0
+            local total = 0
             if result then
                 for i = 1, items_table do
                     if reput[id][1] == FOIRE_DE_SOMBRELUNE then
                         level = 3
                         if i == 1 then
-                            list_result[#list_result+1] = { 2, "Total plantes nb/total</p>" }
+                            pos = 1
+                            list_result[#list_result+1] = { 2, "Total plantes "..items_count.."/"..total.."</p>" }
+                            pos_item = #list_result
                         else
-                            list_result[#list_result+1] = { 2, "Total plantes épique nb/total</p>" }
+                            pos = 2
+                            list_result[#list_result+1] = { 2, "Total plantes "..items_count.."/"..total.."</p>" }
+                            pos_item = #list_result
                         end
                     elseif reput[id][1] == SHEN_DRALAR then
                         level = 3
@@ -242,6 +254,17 @@ function Update()
                     end
                     for i2 = 1, #result[i] do
                         list_result[#list_result+1] = { level, "|TInterface/Icons/"..result[i][i2][1]..":15|t"..result[i][i2][2].." "..result[i][i2][3].."/"..result[i][i2][4]*multiplicateur.."</p>" }
+                        total = result[i][i2][4]*multiplicateur
+                        items_count = items_count + result[i][i2][3]
+                    end
+                    if reput[id][1] == FOIRE_DE_SOMBRELUNE then
+                        if pos == 1 then
+                            list_result[pos_item] = { 2, "Total plantes "..items_count.."/"..total.."</p>" }
+                        elseif pos == 2 then
+                            list_result[pos_item] = { 2, "Total plantes épique "..items_count.."/"..total.."</p>" }
+                            pos = 0
+                        end
+                        items_count = 0
                     end
                 end
             end
@@ -253,6 +276,11 @@ function Update()
     --Update_UI(list_result)
 end
 
+
+function Diff_Shen_Dralar(list_items)
+end
+
+
 function Completed(faction_id, reputation)
     local reput_max = REPUT_MAX
     if faction_id == VOILE_SANGLANTE then
@@ -263,16 +291,3 @@ function Completed(faction_id, reputation)
         Set_Completed(faction_id)
     end
 end
-
---foire de sombrelune
---comptage dynamique items = sum items / total items quantity(suit * 15) -- OK
-
---Comptage total en tête  
---2, nb/Total plantes normal
--- 3, plante 1
--- 3, plante 2
---...
---2, nb/Total plantes épique
--- 3, plante 1
-
---idem pour shen'dralar

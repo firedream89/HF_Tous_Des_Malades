@@ -1,6 +1,7 @@
 --CHAT COMMAND
 CMD_HIDE = "hide"
 CMD_SHOW = "show"
+CMD_RESET = "reset"
 
 --CARTEL
 ITEM_QUANTITY = { 40, 4 }

@@ -12,7 +12,10 @@ local function OnEvent(self, event, addOnName)
     TDMDB.shen_dralar = TDMDB.shen_dralar or {}
     TDMDB.completed = TDMDB.completed or IS_COMPLETED
     TDMDB.state = TDMDB.state or STATES
-    TDMDB.showUI = TDMDB.showUI
+    if TDMDB.sessions == 1 then
+      TDMDB.showUI = true
+    end
+
     print("Tous des malades loaded !")
     print("'/tdm hide' for hide UI")
     print("'/tdm show' for show UI")
@@ -31,6 +34,11 @@ local function MyAddonCommands(msg, editbox)
       Ui:Hide()
     elseif msg == CMD_SHOW then
       Ui:Show()
+    elseif msg == CMD_RESET then
+      Ui:Hide()
+      TDMDB = {}
+      print("TDM : Database cleared !")
+      print("TDM : Please Reload UI")
     end
   end
   
